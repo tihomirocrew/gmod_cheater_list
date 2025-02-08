@@ -7,8 +7,11 @@ cheaters.list_temp = {}
 cheaters.fetch_link = "https://raw.githubusercontent.com/tihomirocrew/gmod_cheater_list/refs/heads/main/list.json"
 
 function cheaters.fetch_on_success(body, length, headers, code)
-    cheaters.list_temp = {}
-    cheaters.list_temp = util.JSONToTable(body)
+    local tbl = util.JSONToTable(body)
+    if tbl != nil then
+        cheaters.list_temp = {}
+        cheaters.list_temp = tbl
+    end
 end
 
 function cheaters.fetch_on_failure(msg)
